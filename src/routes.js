@@ -15,9 +15,11 @@ routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.destroy);
 
 // PARKING
+routes.post('/parkings', ParkingController.store);
+
+routes.use('/parkings', [ authMiddleware ]); // MIDDLEWARE
 routes.get('/parkings', ParkingController.index);
 routes.get('/parkings/:id', ParkingController.show);
-routes.post('/parkings', ParkingController.store);
 routes.put('/parkings/:id', ParkingController.update);
 routes.delete('/parkings/:id', ParkingController.destroy);
 

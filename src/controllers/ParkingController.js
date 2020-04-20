@@ -3,8 +3,20 @@ const { parking } = require('../app/models');
 module.exports = {
     async index(req, res) {
         const parkings = await parking.findAll();
-        res.status(200).json(parkings);
-        return res.send();
+        var new_parkings = [];
+        parkings.map( _parking =>{
+            new_parkings.push({
+                id: _parking.id,
+                name: _parking.name,
+                vacancies: `${_parking.vacancy_used}/${_parking.vacancy}`,
+                coordinate: {
+                    latitude: _parking.location[0],
+                    longitude: _parking.location[1]
+                },
+                price: _parking.price
+            });
+        });
+        return res.status(200).json(new_parkings);
     },
 
     async show(req, res) {

@@ -33,7 +33,7 @@ module.exports = {
             });
             
             if(!user_){
-                return res.status(200).json({ error: 'E-mail não cadastrado' });
+                return res.status(404).json({ error: 'E-mail não cadastrado' });
             }
 
             var token = jwt.sign({ 

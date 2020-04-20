@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     async index(req, res) {
         const users = await user.findAll();
-        res.status(200).json(users);
-        return res.send();
+        return res.status(200).json(users);
     },
 
     async show(req, res) {
