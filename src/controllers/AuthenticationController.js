@@ -1,4 +1,4 @@
-const { user } = require('../app/models');
+const { user, parking } = require('../app/models');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
@@ -22,7 +22,15 @@ module.exports = {
             id: user_.id 
         }, process.env.JWT_SECRET_KEY);
 
-        return res.status(200).json({ user: user_, token });
+        var parkin_user = null;
+        if(user_.type_user === 'parking'){
+            const parking_ = await parking.findOne({ 
+                where: { id_user: user_.id },
+            });
+            parkin_user = parking_;
+        }
+
+        return res.status(200).json({ user: user_, token, parking: parkin_user });
     },
 
     async login_google(req, res) {
@@ -40,7 +48,15 @@ module.exports = {
                 id: user_.id 
             }, process.env.JWT_SECRET_KEY);
 
-            return res.status(200).json({ user: user_, token });
+            var parkin_user = null;
+            if(user_.type_user === 'parking'){
+                const parking_ = await parking.findOne({ 
+                    where: { id_user: user_.id },
+                });
+                parkin_user = parking_;
+            }
+
+            return res.status(200).json({ user: user_, token, parking: parkin_user });
         } catch (error) {
             return res.status(404).json({ error: `Erro ao fazer login. Erro: ${error}` });
         }

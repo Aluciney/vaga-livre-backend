@@ -7,8 +7,9 @@ module.exports = {
         parkings.map( _parking =>{
             new_parkings.push({
                 id: _parking.id,
+                id_user: _parking.id_user,
                 name: _parking.name,
-                vacancies: `${_parking.vacancy_used}/${_parking.vacancy}`,
+                vacancies: `${_parking.vacancy - _parking.vacancy_used}/${_parking.vacancy}`,
                 coordinate: {
                     latitude: _parking.location[0],
                     longitude: _parking.location[1]
@@ -29,8 +30,13 @@ module.exports = {
 
     async store(req, res) {
         try {
-            const _parking = await parking.create(req.body);
-
+            const _parking = await parking.create({
+                ...req.body,
+                location: [
+                    req.body.location.latitude,
+                    req.body.location.longitude,
+                ]
+            });
             return res.status(201).json(_parking);
         } catch (error) {
             return res.status(404).json({ error: `Erro ao cadastrar estacionamento. Erro: ${error}` });
