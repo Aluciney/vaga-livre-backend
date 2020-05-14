@@ -23,7 +23,7 @@ module.exports = {
         }, process.env.JWT_SECRET_KEY);
 
         if(user_.type_user === 'user'){
-            const vehicles = await vehicle.all({
+            const vehicles = await vehicle.findAll({
                 where: { id_user: user_.id },
             });
             return res.status(200).json({ user: user_, token, vehicles });
@@ -52,7 +52,7 @@ module.exports = {
             }, process.env.JWT_SECRET_KEY);
 
             if(user_.type_user === 'user'){
-                const vehicles = await vehicle.all({
+                const vehicles = await vehicle.findAll({
                     where: { id_user: user_.id },
                 });
                 return res.status(200).json({ user: user_, token, vehicles });
