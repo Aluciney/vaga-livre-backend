@@ -4,6 +4,7 @@ const authMiddleware = require('./middlewares/auth');
 const AuthenticationController = require('./controllers/AuthenticationController');
 const UserController = require('./controllers/UserController');
 const ParkingController = require('./controllers/ParkingController');
+const VehicleController = require('./controllers/VehicleController');
 
 // USER
 routes.post('/users', UserController.store);
@@ -22,6 +23,15 @@ routes.get('/parkings', ParkingController.index);
 routes.get('/parkings/:id', ParkingController.show);
 routes.put('/parkings/:id', ParkingController.update);
 routes.delete('/parkings/:id', ParkingController.destroy);
+
+// VEHICLE
+routes.post('/vehicles', VehicleController.store);
+
+routes.use('/vehicles', [ authMiddleware ]); // MIDDLEWARE
+routes.get('/vehicles', VehicleController.index);
+routes.get('/vehicles/:id', VehicleController.show);
+routes.put('/vehicles/:id', VehicleController.update);
+routes.delete('/vehicles/:id', VehicleController.destroy);
 
 // authentication
 routes.post('/authentication/login', AuthenticationController.login);

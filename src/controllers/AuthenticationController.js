@@ -1,4 +1,4 @@
-const { user, parking } = require('../app/models');
+const { user, parking, vehicle } = require('../app/models');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
@@ -22,15 +22,18 @@ module.exports = {
             id: user_.id 
         }, process.env.JWT_SECRET_KEY);
 
-        var parkin_user = null;
-        if(user_.type_user === 'parking'){
-            const parking_ = await parking.findOne({ 
+        if(user_.type_user === 'user'){
+            const vehicles = await vehicle.all({
                 where: { id_user: user_.id },
             });
-            parkin_user = parking_;
+            return res.status(200).json({ user: user_, token, vehicles });
         }
 
-        return res.status(200).json({ user: user_, token, parking: parkin_user });
+        const parking_ = await parking.findOne({ 
+            where: { id_user: user_.id },
+        });
+
+        return res.status(200).json({ user: user_, token, parking: parking_ });
     },
 
     async login_google(req, res) {
@@ -48,15 +51,18 @@ module.exports = {
                 id: user_.id 
             }, process.env.JWT_SECRET_KEY);
 
-            var parkin_user = null;
-            if(user_.type_user === 'parking'){
-                const parking_ = await parking.findOne({ 
+            if(user_.type_user === 'user'){
+                const vehicles = await vehicle.all({
                     where: { id_user: user_.id },
                 });
-                parkin_user = parking_;
+                return res.status(200).json({ user: user_, token, vehicles });
             }
 
-            return res.status(200).json({ user: user_, token, parking: parkin_user });
+            const parking_ = await parking.findOne({ 
+                where: { id_user: user_.id },
+            });
+
+            return res.status(200).json({ user: user_, token, parking: parking_ });
         } catch (error) {
             return res.status(404).json({ error: `Erro ao fazer login. Erro: ${error}` });
         }
