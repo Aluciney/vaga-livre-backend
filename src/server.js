@@ -23,6 +23,18 @@ io.on('connection', socket => {
         io.emit('update_parking', parking);
     });
 
+    socket.on('request_routing_parking', parking => {
+        io.emit('request_routing_parking', parking);
+    });
+
+    socket.on('cancel_routing_parking', parking => {
+        io.emit('cancel_routing_parking', parking);
+    });
+
+    socket.on('finish_routing_parking', parking => {
+        io.emit('finish_routing_parking', parking);
+    });
+
     socket.on('disconnect', () => {
 
     });
