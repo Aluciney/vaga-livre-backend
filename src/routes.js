@@ -5,6 +5,7 @@ const AuthenticationController = require('./controllers/AuthenticationController
 const UserController = require('./controllers/UserController');
 const ParkingController = require('./controllers/ParkingController');
 const VehicleController = require('./controllers/VehicleController');
+const HistoricController = require('./controllers/HistoricController');
 
 // USER
 routes.post('/users', UserController.store);
