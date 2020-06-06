@@ -2,7 +2,9 @@ const { vehicle } = require('../app/models');
 
 module.exports = {
     async index(req, res) {
-        const vehicles = await vehicle.findAll();
+        const vehicles = await vehicle.findAll({
+            where: { ...req.query }
+        });
 
         return res.status(200).json(vehicles);
     },
