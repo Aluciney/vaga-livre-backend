@@ -35,6 +35,10 @@ io.on('connection', socket => {
         io.emit('finish_routing_parking', parking);
     });
 
+    socket.on('new_historic', historic => {
+        io.emit('new_historic', historic);
+    });
+
     socket.on('disconnect', () => {
 
     });
