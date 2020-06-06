@@ -12,15 +12,44 @@ module.exports = {
       id_user: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { 
-          model: 'user' 
+        references: {
+          model: 'user'
         }
       },
       type: {
         allowNull: false,
         type: Sequelize.STRING
       },
+      brand: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      model: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       board: {
+        allowNull: false,
+        unique: true,
+        type: Sequelize.STRING
+      },
+      chassi: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      color: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      municipio: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      uf: {
+        allowNull: false,
+        type: Sequelize.STRING(2)
+      },
+      year: {
         allowNull: false,
         type: Sequelize.STRING
       },
