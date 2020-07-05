@@ -14,7 +14,9 @@ module.exports = {
                     latitude: _parking.location[0],
                     longitude: _parking.location[1]
                 },
-                price: _parking.price
+                price_motorcycle: _parking.price_motorcycle,
+                price_car: _parking.price_car,
+                price_pickup: _parking.price_pickup,
             });
         });
         return res.status(200).json(new_parkings);

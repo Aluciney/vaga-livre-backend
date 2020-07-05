@@ -24,7 +24,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.JSON
       },
-      price: {
+      price_motorcycle: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(11,2)
+      },
+      price_car: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(11,2)
+      },
+      price_pickup: {
         allowNull: false,
         type: Sequelize.DECIMAL(11,2)
       },

@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
         id_user: DataTypes.INTEGER,
         name: DataTypes.STRING,
         location: DataTypes.JSON,
-        price: DataTypes.DECIMAL,
+        price_motorcycle: DataTypes.DECIMAL,
+        price_car: DataTypes.DECIMAL,
+        price_pickup: DataTypes.DECIMAL,
         vacancy: DataTypes.INTEGER,
         vacancy_used: DataTypes.INTEGER
     }, {});
